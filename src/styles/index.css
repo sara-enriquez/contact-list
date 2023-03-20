@@ -1,3 +1,77 @@
-/* 
-    General Styles
-*/
+.add-new-contact{
+    margin-right: 20px;
+}
+
+.contact-list{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+    padding-left: 0;
+}
+
+.contact{
+    display:flex;
+    border: 1px solid rgb(5, 5, 65);
+
+}
+
+.contact-image{
+    width: 15%;
+    height: 150px;
+}
+
+.contact-data{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 85%;
+    padding-left: 10px;
+    height: 100%;
+}
+
+.contact-full-name{
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 1rem;
+}
+
+.contact-address{
+    font-size: 15px;
+    margin-bottom: 1px;
+}
+
+.contact-phone{
+    font-size: 12px;
+    margin-bottom: 1px;
+}
+
+.contact-email{
+    font-size: 10px;
+    margin-bottom: 1rem;
+}
+
+.fa-solid{
+    margin-right: 15px;
+}
+
+.contact-buttons{
+    display: flex;
+    flex-direction: row;
+}
+
+.form-title{
+text-align: center;
+margin-top: 30px;
+margin-bottom: 0%;
+}
+
+.form-labels{
+    margin: 10px 0 10px 0;
+}
+
+.btn-formulary{
+    width: 100%;
+    margin: 10px 0 10px 0;
+
+}
