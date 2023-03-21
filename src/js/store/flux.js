@@ -1,15 +1,18 @@
+import { updateContact } from "../service";
+
 const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
       contactList: [],
+      contact : {}
     },
     actions: {
       addContactList: (data) => {
        setStore({ contactList: data });
       },
-      addNewContact: (contact) => {
+      addNewContact: (data) => {
         const store = getStore();
-       setStore({ contactList: [...store.contactList, contact]});
+       setStore({ contactList: [...store, data]});
       },
     },
   };

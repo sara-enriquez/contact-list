@@ -60,6 +60,14 @@
     flex-direction: row;
 }
 
+.fa-pen{
+    margin: 10px;
+}
+
+.fa-trash-can{
+    margin: 10px;
+}
+
 .form-title{
 text-align: center;
 margin-top: 30px;

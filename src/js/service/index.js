@@ -1,58 +1,81 @@
+import { useParams } from "react-router-dom";
+
+
 export const getContactList = async () => {
+  const URL =
+    "https://assets.breatheco.de/apis/fake/contact/agenda/sara-enriquez";
 
-   const URL = "https://assets.breatheco.de/apis/fake/contact/agenda/sara-enriquez"
+  try {
+    const response = await fetch(URL, { method: "GET" });
+    const data = await response.json();
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
+};
 
-     try {
-        const response = await fetch (URL, { method: "GET" });
-        const data = await response.json();
-        return data;
+export const postNewContact = async (fullName, email, phone, address) => {
+  const URL = "https://assets.breatheco.de/apis/fake/contact/";
+  let contact = {
+    full_name: fullName,
+    email: email,
+    agenda_slug: "sara-enriquez",
+    address: address,
+    phone: phone,
+  };
 
-     } catch (err) {console.log(err)}
+  try {
+    const response = await fetch(URL, {
+      method: "POST",
+      body: JSON.stringify(contact),
+      headers: { "Content-type": "application/json;" },
+    });
+    const data = await response.json();
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
+};
 
-    }
+export const updateContact = async (fullName, email, phone, address, id) => {
+const params = useParams();
+  const URL = `https://assets.breatheco.de/apis/fake/contact/${params.id}`;
 
-export const postNewContact = async () => {
+  let contact = {
+   full_name: fullName,
+   email: email,
+   agenda_slug: "sara-enriquez",
+   address: address,
+   phone: phone,
+   id: id
+ };
 
-   const URL = "https://assets.breatheco.de/apis/fake/contact/"
-
-      try{
-         await fetch (URL, { 
-            method: "POST",
-            body: JSON.stringify(data),
-            headers: {"Content-type": "application/json;"}
-         })
-         const data = await response.json();
-         return data;
-      } catch (err) {console.log(err)}
-      
-    }
+  try {
+    await fetch(URL, {
+      method: "PUT",
+      body: JSON.stringify(contact),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+    const data = await response.json();
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
+};
 
 export const deleteContact = async () => {
 
-   const URL = "https://assets.breatheco.de/apis/fake/contact/{contact_id}"
+  const URL =`https://assets.breatheco.de/apis/fake/contact/${id}`;
 
-      try{
-         await fetch (URL, { method: "DELETE"})
-         .then(response => response.json()) 
-         .then(response => console.log(response))
-      } catch (err) {console.log(err)}
-      
-    }
+  try {
+    await fetch(URL, { 
+      method: "DELETE"
+   })
 
-export const updateContact = async () => {
+  } catch (err) {
+    console.log(err);
+  }
+};
 
-   const URL = "https://assets.breatheco.de/apis/fake/contact/{contact_id}"
-
-      try {
-         await fetch (URL, { 
-            method: "PUT",
-            body: JSON.stringify(data), 
-            headers:{
-              'Content-Type': 'application/json'
-            }
-         })
-         .then(response => response.json())
-         .then(response => console.log(response))
-   
-      } catch(err) {console.log(err)};
-}

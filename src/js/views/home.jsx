@@ -1,5 +1,4 @@
 import React, {useEffect, useContext}from "react";
-import "../../styles/home.css";
 import ContactList from "../component/contactList.jsx";
 import { Link } from "react-router-dom";
 
