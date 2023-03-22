@@ -1,28 +1,38 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { postNewContact } from "../service/index.js";
+import { postNewContact, updateContact } from "../service/index.js";
 import { useParams, useNavigate } from "react-router-dom";
 
-
-const Formulary = (props) => {
+const Formulary = () => {
   const [full_name, setFull_name] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
+  const [uniqueContact, setUniqueContact] = useState({});
   const params = useParams();
-  console.log(params.id);
-  
-  
+  const navigate = useNavigate();
+
   const newContact = (e) => {
-      e.preventDefault();
-      postNewContact(full_name, email, phone, address);
-    };
-    
-    
-    const modifyContact = (e) => {
     e.preventDefault();
-    updateContact(full_name, email, phone, address, id)
-  }
+    postNewContact(full_name, email, phone, address);
+    alert("CREATED NEW CONTACT")
+  };
+
+  useEffect(() => {
+    if (params.id) {
+      fetch(`https://assets.breatheco.de/apis/fake/contact/${params.id}`)
+        .then((res) => res.json())
+        .then((data) => {
+          setUniqueContact(data);
+        });
+    }
+  }, []);
+
+  const modifyContact = (e) => {
+    e.preventDefault();
+    updateContact(full_name, email, phone, address, params.id);
+    alert("MODIFIED CONTACT");
+  };
 
   return (
     <>
@@ -35,7 +45,7 @@ const Formulary = (props) => {
             type="text"
             className="form-control"
             placeholder="Full Name"
-            defaultValue={full_name}
+            defaultValue={params.id ? uniqueContact.full_name : full_name}
             onChange={(e) => setFull_name(e.target.value)}
           />
           <label className="form-labels"> Email</label>
@@ -45,7 +55,7 @@ const Formulary = (props) => {
             type="email"
             className="form-control"
             placeholder="Enter Email"
-            defaultValue={email}
+            defaultValue={params.id ? uniqueContact.email : email}
             onChange={(e) => setEmail(e.target.value)}
           />
           <label className="form-labels">Phone</label>
@@ -55,7 +65,7 @@ const Formulary = (props) => {
             type="tel"
             className="form-control"
             placeholder="Enter Phone"
-            defaultValue={phone}
+            defaultValue={params.id ? uniqueContact.phone : phone}
             onChange={(e) => setPhone(e.target.value)}
           />
           <label className="form-labels">Address</label>
@@ -65,7 +75,7 @@ const Formulary = (props) => {
             type="text"
             className="form-control"
             placeholder="Enter Address"
-            defaultValue={address}
+            defaultValue={params.id ? uniqueContact.address : address}
             onChange={(e) => setAddress(e.target.value)}
           />
         </div>
@@ -73,7 +83,7 @@ const Formulary = (props) => {
           <button
             className="btn btn-formulary btn-primary"
             onClick={(e) => {
-              newContact(e);
+              params.id ? modifyContact(e) : newContact(e);
             }}
           >
             Save

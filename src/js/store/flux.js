@@ -1,4 +1,3 @@
-import { updateContact } from "../service";
 
 const getState = ({ getStore, getActions, setStore }) => {
   return {
@@ -13,7 +12,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       addNewContact: (data) => {
         const store = getStore();
        setStore({ contactList: [...store, data]});
-      },
+      }
     },
   };
 };

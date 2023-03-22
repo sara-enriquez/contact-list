@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+
 
 
 export const getContactList = async () => {
@@ -38,8 +38,8 @@ export const postNewContact = async (fullName, email, phone, address) => {
 };
 
 export const updateContact = async (fullName, email, phone, address, id) => {
-const params = useParams();
-  const URL = `https://assets.breatheco.de/apis/fake/contact/${params.id}`;
+
+  const URL = `https://assets.breatheco.de/apis/fake/contact/${id}`;
 
   let contact = {
    full_name: fullName,
@@ -51,13 +51,14 @@ const params = useParams();
  };
 
   try {
-    await fetch(URL, {
+    const response = await fetch(URL, {
       method: "PUT",
       body: JSON.stringify(contact),
       headers: {
         "Content-Type": "application/json",
       },
     })
+    
     const data = await response.json();
     return data;
   } catch (err) {
@@ -65,7 +66,7 @@ const params = useParams();
   }
 };
 
-export const deleteContact = async () => {
+export const deleteContact = async (id) => {
 
   const URL =`https://assets.breatheco.de/apis/fake/contact/${id}`;
 
