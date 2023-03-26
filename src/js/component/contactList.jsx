@@ -19,11 +19,16 @@ const ContactList = () => {
     getInitialContactList();
   }, []);
 
+  const deleteOneContact = async (id) => {
+    await deleteContact(id);
+    await getInitialContactList();
+  }
+
   return (
     <ul className="contact-list">
       {store.contactList.map((contact) => {
         return (
-          <li key={contact.id} contact={contact} className="contact">
+          <li key={contact.id} className="contact">
             <img
               className="contact-image"
               src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQn9G5TBiLuvzDfAOMRu0gm_wzM7laPOcomOzfbYb3RQ&s"
@@ -90,8 +95,9 @@ const ContactList = () => {
                           className="btn btn-success"
                           id="deletebtn"
                           onClick={() => {
-                            deleteContact(contact.id);
+                            deleteOneContact(contact.id);
                           }}
+                          data-bs-dismiss="modal"
                         >
                           Delete
                         </button>

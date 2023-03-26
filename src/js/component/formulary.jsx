@@ -12,10 +12,10 @@ const Formulary = () => {
   const params = useParams();
   const navigate = useNavigate();
 
-  const newContact = (e) => {
+  const newContact = async (e) => {
     e.preventDefault();
-    postNewContact(full_name, email, phone, address);
-    alert("CREATED NEW CONTACT")
+    await postNewContact(full_name, email, phone, address);
+    navigate("/")
   };
 
   useEffect(() => {
@@ -28,10 +28,10 @@ const Formulary = () => {
     }
   }, []);
 
-  const modifyContact = (e) => {
+  const modifyContact = async (e) => {
     e.preventDefault();
-    updateContact(full_name, email, phone, address, params.id);
-    alert("MODIFIED CONTACT");
+    await updateContact(full_name, email, phone, address, params.id);
+    navigate("/")
   };
 
   return (
